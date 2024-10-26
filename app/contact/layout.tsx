@@ -1,22 +1,14 @@
 "use client";
-
-import * as React from "react";
-import { NextUIProvider } from "@nextui-org/system";
-import { useRouter } from "next/navigation";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { ThemeProviderProps } from "next-themes/dist/types";
+import Preloader from "@/components/Preloader";
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export interface ProvidersProps {
+export default function AboutLayout({
+  children,
+}: {
   children: React.ReactNode;
-  themeProps?: ThemeProviderProps;
-}
-
-export function Providers({ children, themeProps }: ProvidersProps) {
-  const router = useRouter();
-
+}) {
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     function onScroll({ scroll, limit, velocity, direction, progress }: any) {
       console.log(scroll, limit, velocity, direction, progress);
@@ -49,8 +41,10 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   }, []);
 
   return (
-    <NextUIProvider navigate={router.push}>
-      <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-    </NextUIProvider>
+    <main className="overflow-hidden">
+      <AnimatePresence mode="wait">
+        {isLoading && <Preloader />}
+      </AnimatePresence>
+    </main>
   );
 }
