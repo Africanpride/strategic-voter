@@ -80,7 +80,7 @@ export default function Preloader() {
       variants={slideUp}
       initial="initial"
       exit="exit"
-      className="introduction absolute inset-0"
+      className="introduction inset-0 "
     >
       {dimension.width > 0 && (
         <>

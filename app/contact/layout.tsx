@@ -41,10 +41,12 @@ export default function AboutLayout({
   }, []);
 
   return (
-    <main className="overflow-hidden">
+    <main>
       <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
       </AnimatePresence>
+
+      <div>{children}</div>
     </main>
   );
 }
